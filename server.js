@@ -14,7 +14,7 @@ const request = require('request');
 mongoose.Promise = Promise;
 
 // Initialize Express
-var app = express();
+const app = express();
 
 // Use morgan & body parser
 app.use(logger("dev"));
@@ -30,10 +30,30 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // DB config w/ mongoose
+// Heroku URL
+// https://vast-fjord-16204.herokuapp.com/
+// create an if/else statement for enviroment
 
+// mongoose db
+const db = mongoose.connection;
+// if mongoose error
+db.on('error', function(err) {
+	console.log('Mongoose Error: ', err);
+});
+// mongoose successful connection
+db.once('open', function() {
+  console.log('Mongoose connected.');
+});
 
-// Listening
-var port = process.env.PORT || 3000;
+// import comment, article models & controllerr & routes
+const comment = require('./models/comment.js');
+const article = require('./models/article.js');
+const router = require('./controllers/controller.js');
+// uncomment when i build routes
+// app.use('/', router);
+
+// Port Listening
+const port = process.env.PORT || 3000;
 app.listen(port, function(){
   console.log('Listening on port: ' + port);
 });
