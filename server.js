@@ -1,6 +1,11 @@
-const cheerio = require('cheerio');
-const request = require('request');
+// NPMs
 const express = require('express');
-const mongojs   = require('mongojs');
+const exphbs = require('express-handlebars');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const logger = require('morgan'); // debugging
 
-console.log('Hello World!');
+const cheerio = require('cheerio'); 
+const request = require('request');
+
+// console.log('Hello World!');
