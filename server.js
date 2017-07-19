@@ -9,3 +9,5 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 // console.log('Hello World!');
+
+mongoose.Promise = Promise;
