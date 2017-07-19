@@ -28,3 +28,12 @@ app.use(express.static("public"));
 // Handlerbars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+
+// DB config w/ mongoose
+
+
+// Listening
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('Listening on port: ' + port);
+});
