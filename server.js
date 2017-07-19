@@ -24,3 +24,7 @@ app.use(bodyParser.urlencoded({
 
 // connect to public folder
 app.use(express.static("public"));
+
+// Handlerbars
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
