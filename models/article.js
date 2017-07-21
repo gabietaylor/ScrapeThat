@@ -5,20 +5,20 @@ var Schema = mongoose.Schema;
 
 // Create article schema
 var ArticleSchema = new Schema({
-  // title 
-  title: {
-    type: String,
-    required: true
-  },
-  // link 
-  link: {
-    type: String,
-    required: true
-  },
-  note: {
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  }
+    // title 
+    title: {
+        type: String,
+        required: true
+    },
+    // link 
+    link: {
+        type: String,
+        required: true
+    },
+    note: {
+        type: Schema.Types.ObjectId,
+        ref: "Note"
+    }
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
