@@ -20,27 +20,45 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/newsonescraper");
+var dbconnectstring =
+    process.env.MONGODB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/newsonescraper';
+
+mongoose.connect(dbconnectstring, {
+    useMongoClient: true
+});
+
 var db = mongoose.connection;
+
+// HEROKU DEPLOYMENT: mongodb://heroku_4qtsh0tk:753riph12pdde4nlk2iobjdgct@ds115583.mlab.com:15583/heroku_4qtsh0tk
 
 db.on("error", function(error) {
     console.log("Mongoose Error: ", error);
 });
 
 db.once("open", function() {
-    console.log("Mongoose connection successful.");
+    console.log("Mongoose connected.");
+
+    mongoose.connection.db.listCollections().toArray(function(err, names) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(names);
+        }
+    });
 });
 
 app.get("/scrape", function(req, res) {
     request("https://newsone.com/category/nation/", function(error, response, html) {
         var $ = cheerio.load(html);
-        $(".post-split").each(function(i, element) {
+        $(".post-meta").each(function(i, element) {
 
             var result = {};
 
-            result.title = $(element).find(".post-meta").text().trim();
+            result.title = $(element).find(".post-meta__title").text().trim();
             //console.log(result.title);
-            result.link = $(element).find(".post-link").text().trim();
+            result.link = $(element).find(".post-meta__lead").text().trim();
             console.log(result.link);
 
             var entry = new Article(result);
@@ -52,10 +70,10 @@ app.get("/scrape", function(req, res) {
                     console.log(doc);
                 }
             });
-
         });
     });
     res.send("Scrape Complete");
+    res.redirect("/");
 });
 
 app.get("/article", function(req, res) {

@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <title>News One Scraper</title>
   </head>
-
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <body>
     <div id="wrapper">
       <h1>News One Scraper</h1>
-      <div id="article"></div>
-      <div id="note"></div>
+      <br>
+      <div class="row">
+        <div class="col-md-8 scroll">
+          <div id="article"></div>
+        </div>
+        <div class="col-md-4">
+          <a href="/scrape">
+            <input type="button" value="SCRAPE" />
+          </a>
+        </div>
+        <div class="col-md-4">
+          <div id="note"></div>
+        </div>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
