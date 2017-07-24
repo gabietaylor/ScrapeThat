@@ -20,20 +20,29 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-var dbconnectstring =
+var PORT = process.env.PORT || 3000;
+var db =
     process.env.MONGODB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/newsonescraper';
 
-mongoose.connect(dbconnectstring, {
+/*mongoose.connect(dbconnectstring, {
     useMongoClient: true
-});
+});*/
 
-var db = mongoose.connection;
+// var db = mongoose.connection;
 
 // HEROKU DEPLOYMENT: mongodb://heroku_4qtsh0tk:753riph12pdde4nlk2iobjdgct@ds115583.mlab.com:15583/heroku_4qtsh0tk
 
-db.on("error", function(error) {
+mongoose.connect(db, function(err,res){
+    if(err){
+        console.log("Error connection to: " + db + '. ' + err);
+    } else {
+        console.log("Succeeded connecting to: " + db);
+    }
+});
+
+/*db.on("error", function(error) {
     console.log("Mongoose Error: ", error);
 });
 
@@ -47,7 +56,7 @@ db.once("open", function() {
             console.log(names);
         }
     });
-});
+});*/
 
 app.get("/scrape", function(req, res) {
     request("https://newsone.com/category/nation/", function(error, response, html) {
