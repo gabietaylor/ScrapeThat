@@ -22,9 +22,7 @@ app.use(express.static("public"));
 
 var PORT = process.env.PORT || 3000;
 var db =
-    process.env.MONGODB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/newsonescraper';
+    process.env.MONGODB_URI || 'mongodb://localhost/newsonescraper';
 
 /*mongoose.connect(dbconnectstring, {
     useMongoClient: true
@@ -34,12 +32,15 @@ var db =
 
 // HEROKU DEPLOYMENT: mongodb://heroku_4qtsh0tk:753riph12pdde4nlk2iobjdgct@ds115583.mlab.com:15583/heroku_4qtsh0tk
 
-mongoose.connect(db, function(err,res){
+mongoose.connect(db, function(err){
     if(err){
         console.log("Error connection to: " + db + '. ' + err);
-    } else {
-        console.log("Succeeded connecting to: " + db);
-    }
+    } 
+});
+
+app.listen(PORT, function() {
+    console.log("App running on port 3000!");
+
 });
 
 /*db.on("error", function(error) {
@@ -151,8 +152,4 @@ app.post("/article/:id", function(req, res) {
                 });
         }
     });
-});
-
-app.listen(3000, function() {
-    console.log("App running on port 3000!");
 });
