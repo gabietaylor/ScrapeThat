@@ -58,7 +58,7 @@ db.once("open", function() {
     });
 });*/
 
-router.get('/', function (req, res) {
+/*router.get('/', function (req, res) {
     Article.find({})
         .populate("note")
         .exec(function(error, doc) {
@@ -74,8 +74,7 @@ router.get('/', function (req, res) {
             }
         }); // .exec(function..
     // Rendering index.handlebars
-}); // router.get '/'
-
+});*/ // router.get '/'
 
 app.get("/scrape", function(req, res) {
     request("https://newsone.com/category/nation/", function(error, response, html) {
