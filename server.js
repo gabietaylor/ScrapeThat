@@ -58,6 +58,25 @@ db.once("open", function() {
     });
 });*/
 
+router.get('/', function (req, res) {
+    Article.find({})
+        .populate("note")
+        .exec(function(error, doc) {
+            // Log any errors
+            if (error) {
+                console.log(error);
+            }
+            // Or send the doc to the browser as a json object
+            else {
+                var data = {data: doc};
+                //console.log(data);
+                res.render('index.html', data);
+            }
+        }); // .exec(function..
+    // Rendering index.handlebars
+}); // router.get '/'
+
+
 app.get("/scrape", function(req, res) {
     request("https://newsone.com/category/nation/", function(error, response, html) {
         var $ = cheerio.load(html);
