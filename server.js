@@ -88,7 +88,7 @@ app.get("/scrape", function(req, res) {
             result.link = $(element).find(".post-meta__lead").text().trim();
             console.log(result.link);
 
-            var entry = new Article(result);
+            var entry = new article(result);
 
             entry.save(function(err, doc) {
                 if (err) {
@@ -104,7 +104,7 @@ app.get("/scrape", function(req, res) {
 });
 
 app.get("/article", function(req, res) {
-    Article.find({})
+    article.find({})
         .populate("note")
         .exec(function(error, doc) {
             if (error) {
@@ -117,7 +117,7 @@ app.get("/article", function(req, res) {
 
 // Grab an article by it's ObjectId
 app.get("/article/:id", function(req, res) {
-    Article.findOne({
+    article.findOne({
             "_id": req.params.id
         })
         .populate("note")
@@ -137,7 +137,7 @@ app.post("/article/:id", function(req, res) {
         if (error) {
             console.log(error);
         } else {
-            Article.findOneAndUpdate({
+            article.findOneAndUpdate({
                     "_id": req.params.id
                 }, {
                     "note": doc._id
