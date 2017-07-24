@@ -16,7 +16,7 @@ var NoteSchema = new Schema({
 });
 
 // Create the Note model with the NoteSchema
-var note = mongoose.model("Note", NoteSchema);
+var Note = mongoose.model("Note", NoteSchema);
 
 // Export the Note model
-module.exports = note;
+module.exports = Note;
