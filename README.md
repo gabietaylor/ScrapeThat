@@ -1,8 +1,9 @@
 # ScrapeThat
 
 
-This activity I created a web app that lets users leave comments on the latest news. 
-
+This activity I created a web app that lets users find news stories from News One.
 Whenever a user visits my site, the app will scrape stories from a news outlet.
 
-All users can leave comments on the stories collected.
+### Click on pics for link to page!!
+# About
+[![Alt text](public/readme.png)](https://guarded-depths-37055.herokuapp.com/)
